@@ -1,0 +1,41 @@
+.content {
+  width: 223px;
+}
+
+.menu-item {
+  font-size: 16px;
+  min-width: 100px;
+  padding: 10px 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background-color: transparent;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  line-height: 20px;
+
+  &:hover {
+    background-color: rgba(22, 24, 35, 0.03);
+  }
+
+  &.separate {
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
+  }
+}
+
+.header {
+  position: relative;
+  height: 50px;
+}
+.back-btn {
+  width: 50px;
+  height: 100%;
+  background-color: transparent;
+  cursor: pointer;
+}
+.header-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
