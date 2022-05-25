@@ -13,9 +13,15 @@ function HomeItem({ data, index, big = false }) {
 
     const [time, setTime] = useState()
 
+    const [hover, setHover] = useState(false)
+
     const ref = useRef()
 
     const ref_video = useRef()
+
+    const ref_content = useRef()
+
+    const ref_footer = useRef()
 
     const ref_process = useRef()
 
@@ -73,6 +79,21 @@ function HomeItem({ data, index, big = false }) {
             setPlay(true)
         }
 
+        ref_process.current.onmousedown = function () {
+            setHover(true)
+        }
+
+        ref_process.current.onmouseup = function () {
+            setHover(false)
+            console.log('false');
+        }
+
+        ref_footer.current.onmousemove = function (e) {
+            if (hover) {
+                console.log(e.clientX);
+                e.stopPropagation();
+            }
+        }
     })
 
 
@@ -139,7 +160,7 @@ function HomeItem({ data, index, big = false }) {
                 <div className={cx('div-btn-video')}>
                     <div className={big ? cx('div_first', 'Big') : cx('div_first')} >
                         <canvas className={cx('canvas-video')}></canvas>
-                        <div className={cx('div_first-item')}>
+                        <div className={cx('div_first-item')} ref={ref_footer}>
                             <div className={cx('div-1')}>
                                 {data.thumb_avatar ? <img src={data.thumb_avatar}></img> : Fragment}
                                 <div className={cx('div-1_item')}>
@@ -157,7 +178,7 @@ function HomeItem({ data, index, big = false }) {
                             </div>
                             <div className={cx('button-footer')}>
                                 <div className={cx('process-item')}>
-                                    <div className={cx('process-stonk')}></div>
+                                    <div className={cx('process-stonk')} ref={ref_content}></div>
                                     <div className={cx('process-stonk1')} ref={ref_process}></div>
                                     <div className={cx('process-stonk2')} ref={ref_progress}></div>
                                 </div>
