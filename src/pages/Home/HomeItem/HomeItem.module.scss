@@ -409,52 +409,8 @@ canvas {
   height: 16px;
   flex: 1 1 auto;
   position: relative;
-
-  &:hover > .process-stonk2 {
-    height: 4px;
-    cursor: pointer;
-    background-color: rgb(255, 255, 255);
-    opacity: 1;
-  }
-  &:hover > .process-stonk1 {
-    display: block;
-  }
-}
-
-.process-stonk {
-  height: 2px;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.2);
-  position: absolute;
-  left: 0px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
-
-.process-stonk1 {
-  display: none;
-  width: 12px;
-  height: 12px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 12px;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  z-index: 1;
-  left: 6px;
-}
-
-.process-stonk2 {
-  height: 2px;
-  width: 0%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  transform-origin: left center;
-  background-color: white;
+  display: flex;
+  align-items: center;
 }
 
 .process-number {
@@ -469,4 +425,39 @@ canvas {
   font-feature-settings: 'tnum';
   font-variant-numeric: tabular-nums;
   font-family: Tahoma, PingFangSC, sans-serif;
+}
+
+.progress {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  cursor: pointer;
+
+  &:hover::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+  }
+
+  &:hover.progress__track {
+    height: 5px;
+  }
+}
+
+.progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgb(255, 255, 255);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.progress__track {
+  height: 2px;
+  position: absolute;
+  background: white;
 }

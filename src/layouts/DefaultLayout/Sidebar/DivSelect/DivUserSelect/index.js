@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import { LiveStreamIcon } from '../../../../../icons';
+import { LiveStreamIcon } from '../../../../../components/icons';
 import styles from './DivUserSelect.module.scss';
 
 

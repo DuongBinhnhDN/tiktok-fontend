@@ -13,19 +13,13 @@ function HomeItem({ data, index, big = false }) {
 
     const [time, setTime] = useState()
 
-    const [hover, setHover] = useState(false)
-
     const ref = useRef()
 
     const ref_video = useRef()
 
-    const ref_content = useRef()
-
-    const ref_footer = useRef()
+    const ref_progress = useRef()
 
     const ref_process = useRef()
-
-    const ref_progress = useRef()
 
     const updateTime = useRef()
 
@@ -52,47 +46,25 @@ function HomeItem({ data, index, big = false }) {
                     '/'
                     +
                     (Math.floor(this.duration).toString().length >= 2 ? '00:' + Math.floor(this.duration) : '00:0' + Math.floor(this.duration)))
-                ref_process.current.style.left = progressPercent + '%';
-                ref_progress.current.style.width = progressPercent + '%';
+                ref_progress.current.value = progressPercent
+                ref_process.current.style.width = progressPercent + '%'
             }
         };
 
         ref_video.current.onmouseover = function () {
             if (this.duration) {
-                const progressPercent = Math.floor(
-                    (this.currentTime / this.duration) * 100
-                );
                 setTime(
                     (Math.floor(this.currentTime).toString().length >= 2 ? '00:' + Math.floor(this.currentTime) : '00:0' + Math.floor(this.currentTime))
                     +
                     '/'
                     +
                     (Math.floor(this.duration).toString().length >= 2 ? '00:' + Math.floor(this.duration) : '00:0' + Math.floor(this.duration)))
-                ref_process.current.style.left = progressPercent + '%';
-                ref_progress.current.style.width = progressPercent + '%';
             }
         };
 
         ref_video.current.onended = function () {
-            ref_progress.current.style.width = 0 + '%';
-            ref_process.current.style.left = 0 + '%';
+
             setPlay(true)
-        }
-
-        ref_process.current.onmousedown = function () {
-            setHover(true)
-        }
-
-        ref_process.current.onmouseup = function () {
-            setHover(false)
-            console.log('false');
-        }
-
-        ref_footer.current.onmousemove = function (e) {
-            if (hover) {
-                console.log(e.clientX);
-                e.stopPropagation();
-            }
         }
     })
 
@@ -160,7 +132,7 @@ function HomeItem({ data, index, big = false }) {
                 <div className={cx('div-btn-video')}>
                     <div className={big ? cx('div_first', 'Big') : cx('div_first')} >
                         <canvas className={cx('canvas-video')}></canvas>
-                        <div className={cx('div_first-item')} ref={ref_footer}>
+                        <div className={cx('div_first-item')}>
                             <div className={cx('div-1')}>
                                 {data.thumb_avatar ? <img src={data.thumb_avatar}></img> : Fragment}
                                 <div className={cx('div-1_item')}>
@@ -178,9 +150,8 @@ function HomeItem({ data, index, big = false }) {
                             </div>
                             <div className={cx('button-footer')}>
                                 <div className={cx('process-item')}>
-                                    <div className={cx('process-stonk')} ref={ref_content}></div>
-                                    <div className={cx('process-stonk1')} ref={ref_process}></div>
-                                    <div className={cx('process-stonk2')} ref={ref_progress}></div>
+                                    <input className={cx('progress')} type="range" step="1" min="0" max="100" ref={ref_progress} />
+                                    <div className={cx("progress__track")} ref={ref_process}></div>
                                 </div>
                                 <div className={cx('process-number')} ref={updateTime}>{time}</div>
                             </div>

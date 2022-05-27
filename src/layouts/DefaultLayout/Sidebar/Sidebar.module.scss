@@ -15,6 +15,10 @@
     background: rgba(22, 24, 35, 0.06);
     border-radius: 999px;
   }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
 }
 
 .container {

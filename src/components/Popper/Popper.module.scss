@@ -9,4 +9,6 @@
   box-sizing: border-box;
   max-height: min((100vh - 96px) - 60px, 734px);
   margin-top: 2px;
+  display: flex;
+  flex-direction: column;
 }

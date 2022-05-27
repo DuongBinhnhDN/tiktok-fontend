@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { MusicIcon, SharpIcon } from '../../../icons';
+import { MusicIcon, SharpIcon } from '../../../components/icons';
 import DisCover from './DivCover';
 import DivFooter from './DivFooter';
 import DivSelect from './DivSelect';

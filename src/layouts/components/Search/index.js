@@ -3,9 +3,9 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import 'tippy.js/dist/tippy.css';
-import AccountItem from '../../../AccountItem';
-import { ClearIcon, LoadingIcon, SearchIcon } from '../../../icons';
-import { Wrapper } from '../../../Popper';
+import AccountItem from '../../../components/AccountItem';
+import { ClearIcon, LoadingIcon, SearchIcon } from '../../../components/icons';
+import { Wrapper } from '../../../components/Popper';
 import styles from './Search.module.scss';
 
 

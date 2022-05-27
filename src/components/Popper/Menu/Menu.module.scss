@@ -1,3 +1,8 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .content {
   width: 223px;
 }
@@ -26,6 +31,7 @@
 .header {
   position: relative;
   height: 50px;
+  flex-shrink: 0;
 }
 .back-btn {
   width: 50px;
@@ -38,4 +44,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.menu-body {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 999px;
+  }
 }
