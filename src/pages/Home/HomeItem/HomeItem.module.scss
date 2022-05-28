@@ -227,9 +227,6 @@
   &:hover > .button-play {
     opacity: 1;
   }
-  &:hover > .button-sound {
-    opacity: 1;
-  }
   &:hover > .button-footer {
     opacity: 1;
   }
@@ -277,7 +274,6 @@
   bottom: 26px;
   left: unset;
   right: 12px;
-  opacity: 0;
 }
 
 .button-footer {

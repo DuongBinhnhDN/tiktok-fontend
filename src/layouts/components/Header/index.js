@@ -1,23 +1,24 @@
-import { faCircleQuestion, faCoins, faEarthAsia, faEllipsisVertical, faGear, faKeyboard, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCircleQuestion, faCoins, faEarthAsia, faGear, faKeyboard, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import 'tippy.js/dist/tippy.css';
 import images from '../../../assets/images';
 import Button from '../../../components/Button';
-import { InfoMation, MessageIcon, MoreIcon, PlusIcon, UploadIcon } from '../../../components/icons';
+import { InfoMation, MessageIcon, MoreIcon, PlusIcon } from '../../../components/icons';
 import Menu from '../../../components/Popper/Menu';
 import Search from '../Search';
 import styles from './Header.module.scss';
-
+import Swal from 'sweetalert2'
 
 
 
 const cx = classNames.bind(styles)
 
-const currentUser = true
+const currentUser = false
 
 const MENU_ITEMS = [
     {
@@ -26,150 +27,6 @@ const MENU_ITEMS = [
         children: {
             title: 'Language',
             data: [
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
-                {
-                    code: 'en',
-                    title: 'English (Hoa Kỳ)',
-                },
-                {
-                    code: 'vi',
-                    title: 'Tiếng Việt (Việt Nam)',
-                },
                 {
                     code: 'en',
                     title: 'English (Hoa Kỳ)',
@@ -219,6 +76,22 @@ const userMenu = [
 
 function Header() {
 
+    const ref = useRef()
+
+
+    useEffect(() => {
+        // ref.current.onclick = function () {
+        //     Swal.fire(
+        //         'Good job!',
+        //         'You clicked the button!',
+        //         'success'
+        //     )
+        // }
+
+
+        console.log(ref.current);
+    })
+
     return <header className={cx('wrapper')}>
         <div className={cx('inner')}>
             <div className={cx('logo')}>
@@ -238,7 +111,8 @@ function Header() {
                                 <Link className={cx('action-btn')} style={{ margin: "0" }} to='/upload'>
                                     <Button upload>
                                         <PlusIcon />
-                                        Upload</Button>
+                                        Upload
+                                    </Button>
                                 </Link>
                             </Tippy>
                             <Tippy content='Tin nhắn' delay={[100, 0]}>
@@ -255,7 +129,7 @@ function Header() {
                         </div>
                     ) : (
                         <>
-                            <Button text leftIcon={<PlusIcon />}>Upload</Button>
+                            <Button text leftIcon={<PlusIcon />} ref={ref}>Upload</Button>
                             <Button primary>Log in</Button>
                         </>
                     )
