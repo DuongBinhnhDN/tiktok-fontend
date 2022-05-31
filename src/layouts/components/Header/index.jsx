@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
-import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import 'tippy.js/dist/tippy.css';
 import images from '../../../assets/images';
@@ -12,7 +11,6 @@ import { InfoMation, MessageIcon, MoreIcon, PlusIcon } from '../../../components
 import Menu from '../../../components/Popper/Menu';
 import Search from '../Search';
 import styles from './Header.module.scss';
-import Swal from 'sweetalert2'
 
 
 
@@ -76,22 +74,6 @@ const userMenu = [
 
 function Header() {
 
-    const ref = useRef()
-
-
-    useEffect(() => {
-        // ref.current.onclick = function () {
-        //     Swal.fire(
-        //         'Good job!',
-        //         'You clicked the button!',
-        //         'success'
-        //     )
-        // }
-
-
-        console.log(ref.current);
-    })
-
     return <header className={cx('wrapper')}>
         <div className={cx('inner')}>
             <div className={cx('logo')}>
@@ -129,7 +111,7 @@ function Header() {
                         </div>
                     ) : (
                         <>
-                            <Button text leftIcon={<PlusIcon />} ref={ref}>Upload</Button>
+                            <Button text leftIcon={<PlusIcon />}>Upload</Button>
                             <Button primary>Log in</Button>
                         </>
                     )
