@@ -8,7 +8,7 @@ const cx = classNames.bind(styles)
 function Button({ rightIcon, leftIcon, rounded = false, disabled = false, text = false,
     large = false, small = false, outline = false, to, href, primary = false, children, upload, follow, ...passAvailable }) {
 
-    let Comp = 'button'
+    let Comp = 'div'
 
     const available = {
         ...passAvailable

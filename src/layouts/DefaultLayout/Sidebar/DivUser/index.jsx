@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { FollowingIcon, FollowingIconHide, HomeIconActive, HomeIconUnactive, LiveIcon, LiveIconHide } from '../../../../components/icons';
+import { FollowingIcon, FollowingIconHide, HomeIconActive, HomeIconUnactive, LiveIcon, LiveIconHide } from '../../../../assets/icons';
 import styles from './DivUser.module.scss';
 import DivUserItem from './DivUserItem';
 

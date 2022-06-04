@@ -398,6 +398,7 @@ canvas {
   font-size: 12px;
   line-height: 17px;
   text-align: center;
+  font-family: ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
 }
 
 .process-item {
@@ -433,15 +434,24 @@ canvas {
   -webkit-transition: 0.2s;
   transition: opacity 0.2s;
   cursor: pointer;
+}
+
+.progress:hover,
+.progress__track:hover {
+  &:hover {
+    height: 5px;
+  }
 
   &:hover::-webkit-slider-thumb {
     width: 12px;
     height: 12px;
   }
+}
 
-  &:hover.progress__track {
-    height: 5px;
-  }
+.progress__track {
+  height: 2px;
+  position: absolute;
+  background: white;
 }
 
 .progress::-webkit-slider-thumb {
@@ -452,8 +462,8 @@ canvas {
   cursor: pointer;
 }
 
-.progress__track {
-  height: 2px;
-  position: absolute;
-  background: white;
+.display {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

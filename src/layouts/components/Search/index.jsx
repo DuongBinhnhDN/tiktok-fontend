@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
 import 'tippy.js/dist/tippy.css';
 import AccountItem from '../../../components/AccountItem';
-import { ClearIcon, LoadingIcon, SearchIcon } from '../../../components/icons';
+import { ClearIcon, LoadingIcon, SearchIcon } from '../../../assets/icons';
 import { Wrapper } from '../../../components/Popper';
 import styles from './Search.module.scss';
 
@@ -45,7 +45,6 @@ function Search() {
                     setLoading(false)
                 })
         }, 1000)
-
         return () => clearTimeout(delayDebounceFn)
 
     }, [searchValue])

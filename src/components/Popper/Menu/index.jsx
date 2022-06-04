@@ -46,9 +46,9 @@ function Menu({ children, items = [], onChange = defaultFn }) {
                         {history.length > 1 && < Header title='Language' onBack={() => {
                             setHistory(prev => prev.slice(0, prev.length - 1))
                         }} />}
-
-                        <div className={cx('menu-body')}>{renderItems()}</div>
-
+                        <div className={cx('menu-body')}>
+                            {renderItems()}
+                        </div>
                     </Wrapper>
                 </div>
             )}

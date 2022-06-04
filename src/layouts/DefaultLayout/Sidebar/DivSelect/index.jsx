@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { CheckIcon } from '../../../../components/icons';
+import { CheckIcon } from '../../../../assets/icons';
 import styles from './DivSelect.module.scss';
 import DivUserSelect from './DivUserSelect';
 

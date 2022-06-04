@@ -1,8 +1,8 @@
 import classNames from 'classnames/bind';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import Button from '../../../components/Button';
-import { CheckIcon, CommentIcon, HeartIcon, MusicIcon, PauseIcon, PlayIcon, ReportIcon, ShareIcon, SharpIcon, SoundIcon, UnSoundIcon } from '../../../components/icons';
-import styles from './HomeItem.module.scss';
+import { CheckIcon, CommentIcon, HeartIcon, MusicIcon, PauseIcon, PlayIcon, ReportIcon, ShareIcon, SharpIcon, SoundIcon, UnSoundIcon } from '../../../assets/icons';
+import styles from './ItemVideo.module.scss';
 const cx = classNames.bind(styles)
 
 function HomeItem({ data, index, big = false }) {
@@ -25,7 +25,6 @@ function HomeItem({ data, index, big = false }) {
 
 
     useEffect(() => {
-
         ref.current.onclick = function () {
             if (play) {
                 ref_video.current.play()
@@ -45,7 +44,8 @@ function HomeItem({ data, index, big = false }) {
                     +
                     '/'
                     +
-                    (Math.floor(this.duration).toString().length >= 2 ? '00:' + Math.floor(this.duration) : '00:0' + Math.floor(this.duration)))
+                    (Math.floor(this.duration).toString().length >= 2 ? '00:' + Math.floor(this.duration) : '00:0' + Math.floor(this.duration))
+                )
                 ref_progress.current.value = progressPercent
                 ref_process.current.style.width = progressPercent + '%'
             }
@@ -58,13 +58,15 @@ function HomeItem({ data, index, big = false }) {
                     +
                     '/'
                     +
-                    (Math.floor(this.duration).toString().length >= 2 ? '00:' + Math.floor(this.duration) : '00:0' + Math.floor(this.duration)))
+                    (Math.floor(this.duration).toString().length >= 2 ? '00:' + Math.floor(this.duration) : '00:0' + Math.floor(this.duration))
+                )
             }
         };
 
         ref_video.current.onended = function () {
-
             setPlay(true)
+            ref_progress.current.value = 0
+            ref_process.current.style.width = 0 + '%'
         }
     })
 
@@ -88,9 +90,13 @@ function HomeItem({ data, index, big = false }) {
                         <a className={cx('link-btn-item')} >
                             <div className={cx('link-btn-item_div')}>
                                 <span className={cx('link-btn-item_span')}>
-                                    <img style={{ width: 100 + '%', height: 100 + '%', objectFit: 'cover' }}
-                                        src={data.avatar}
-                                    ></img>
+                                    {
+                                        data.avatar ?
+                                            (<img className={cx('display')}
+                                                src={data.avatar}>
+                                            </img>)
+                                            : null
+                                    }
                                 </span>
                             </div>
                         </a>
@@ -107,17 +113,15 @@ function HomeItem({ data, index, big = false }) {
                     <Button follow children='Follow' />
                     <div style={{ fontSize: 16, lineHeight: 22 + 'px', wordBreak: 'break-word', width: 510 + 'px' }}>
                         <span style={{ display: 'inline-block' }}>{data.title}</span>
-                        {data.tag ?
-                            data.name_tag.map((item, index) => (
+                        {
+                            data.tag ? data.name_tag.map((item, index) => (
                                 <a className={cx('tag')} href={item.link_tag} target="_blank" key={index}>
-                                    <strong
-                                        className={cx('tag_strong')}
-                                        key={index}>
+                                    <strong className={cx('tag_strong')} key={index}>
                                         #{item.key}
                                     </strong>
                                 </a>
-                            ))
-                            : null}
+                            )) : null
+                        }
                     </div>
                     <h4 className={cx('video-music')}>
                         <a className={cx('video-music_a')} href={data.link_music}>
@@ -134,9 +138,8 @@ function HomeItem({ data, index, big = false }) {
                         <canvas className={cx('canvas-video')}></canvas>
                         <div className={cx('div_first-item')}>
                             <div className={cx('div-1')}>
-                                {data.thumb_avatar ? <img src={data.thumb_avatar}></img> : Fragment}
                                 <div className={cx('div-1_item')}>
-                                    <video style={{ display: 'block', width: 100 + '%', height: 100 + '%', objectFit: 'cover' }}
+                                    <video className={cx('display')}
                                         src={data.link_video} ref={ref_video}></video>
                                 </div>
                             </div>
@@ -150,7 +153,7 @@ function HomeItem({ data, index, big = false }) {
                             </div>
                             <div className={cx('button-footer')}>
                                 <div className={cx('process-item')}>
-                                    <input className={cx('progress')} type="range" step="1" min="0" max="100" ref={ref_progress} />
+                                    <input className={cx('progress')} type="range" min="0" max="100" defaultValue="0" ref={ref_progress} />
                                     <div className={cx("progress__track")} ref={ref_process}></div>
                                 </div>
                                 <div className={cx('process-number')} ref={updateTime}>{time}</div>

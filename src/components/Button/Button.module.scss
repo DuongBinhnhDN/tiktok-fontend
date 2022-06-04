@@ -105,9 +105,6 @@
 
 .text {
   background-color: transparent;
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 .disabled {
@@ -193,4 +190,10 @@
 
 .icon {
   display: flex;
+  margin-right: 8px;
+}
+
+.icon > svg {
+  width: 20px;
+  height: 20px;
 }

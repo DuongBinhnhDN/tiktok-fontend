@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
-import { MusicIcon, SharpIcon } from '../../../components/icons';
+import { useEffect, useRef } from 'react';
+import { MusicIcon, SharpIcon } from '../../../assets/icons';
 import DisCover from './DivCover';
 import DivFooter from './DivFooter';
 import DivSelect from './DivSelect';
@@ -9,6 +10,12 @@ import styles from './Sidebar.module.scss';
 const cx = classNames.bind(styles)
 
 function Sidebar() {
+
+    const ref = useRef()
+
+    useEffect(() => {
+        localStorage.setItem('ref', ref.current.className)
+    }, [ref])
 
     const data = [
         {
@@ -63,7 +70,7 @@ function Sidebar() {
         },
     ]
 
-    return <div className={cx('wrapper')}>
+    return <div className={cx('wrapper')} ref={ref}>
         <div className={cx('container')}>
             <DivUser />
             <DivSelect title='Suggested accounts' atb='See all' index='0' />
