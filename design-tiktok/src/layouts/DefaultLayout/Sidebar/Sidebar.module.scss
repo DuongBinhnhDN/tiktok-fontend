@@ -1,0 +1,43 @@
+.wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  perspective: 1px;
+  transform-style: preserve-3d;
+  perspective-origin: right top;
+  top: 60px;
+  bottom: 0;
+  width: 356px;
+  background: rgba(255, 255, 255, 1);
+  position: fixed;
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: rgba(22, 24, 35, 0.06);
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+}
+
+.container {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  padding: 20px 0 26px;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  min-height: 100%;
+  padding-left: 8px;
+}
