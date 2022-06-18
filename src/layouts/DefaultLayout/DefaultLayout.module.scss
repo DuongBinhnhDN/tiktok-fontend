@@ -32,4 +32,17 @@
   position: absolute;
   right: 0;
   margin-top: 60px;
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 999px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: rgba(22, 24, 35, 0.08) !important;
+  }
 }

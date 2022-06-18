@@ -22,6 +22,7 @@
   line-height: 22px;
   display: flex;
   background-color: transparent;
+  cursor: pointer;
 
   &:hover {
     background-color: rgba(22, 24, 35, 0.03);
@@ -185,6 +186,79 @@
 
   &:hover {
     background-color: rgba(254, 44, 85, 0.06) !important;
+  }
+}
+
+.following {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  color: rgb(22, 24, 35);
+  border-color: rgba(22, 24, 35, 0.12);
+  background-color: rgb(255, 255, 255);
+  max-height: 28px;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  font-family: ProximaNova, PingFangSC, sans-serif;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  right: 0px;
+  position: absolute;
+  top: 28px;
+  min-width: 88px;
+  padding: 0px 10px;
+
+  &:hover {
+    border-color: rgb(208, 209, 211);
+    background-color: rgb(248, 248, 248);
+  }
+}
+
+.login {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  color: rgba(254, 44, 85, 1);
+  border-color: rgba(254, 44, 85, 1);
+  background-color: rgba(255, 255, 255, 1);
+  min-width: 168px;
+  min-height: 48px;
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: 600;
+  font-family: SofiaPro, PingFangSC, sans-serif;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  padding: 6px 8px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 20px;
+  width: 100%;
+
+  &:hover {
+    background-color: rgba(254, 44, 85, 0.06);
   }
 }
 

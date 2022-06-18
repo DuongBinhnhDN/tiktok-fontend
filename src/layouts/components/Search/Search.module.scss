@@ -62,6 +62,7 @@
     -moz-appearance: textfield;
     -ms-appearance: textfield;
     appearance: textfield;
+    padding-right: 40px;
 
     &:not(:placeholder-shown) ~ .search-btn {
       color: rgba(22, 22, 35, 0.75);

@@ -1,85 +1,60 @@
-import classNames from 'classnames/bind';
-import { useEffect, useRef } from 'react';
-import { MusicIcon, SharpIcon } from '../../../assets/icons';
-import DisCover from './DivCover';
-import DivFooter from './DivFooter';
-import DivSelect from './DivSelect';
-import DivUser from './DivUser';
-import styles from './Sidebar.module.scss';
+import axios from "axios";
+import classNames from "classnames/bind";
+import { useEffect, useRef, useState } from "react";
+import Button from "../../../components/Button";
+import { handleShowLogin } from "../../../components/GlobalFunc";
+import DisCover from "./DivCover";
+import DivFooter from "./DivFooter";
+import DivSelect from "./DivSelect";
+import DivUser from "./DivUser";
+import styles from "./Sidebar.module.scss";
 
-const cx = classNames.bind(styles)
+const cx = classNames.bind(styles);
 
 function Sidebar() {
+  const [api, setApi] = useState();
+  const ref = useRef();
+  const currentUser = localStorage.getItem("user");
 
-    const ref = useRef()
+  useEffect(() => {
+    localStorage.setItem("ref", ref.current.className);
+  }, [ref]);
 
-    useEffect(() => {
-        localStorage.setItem('ref', ref.current.className)
-    }, [ref])
+  useEffect(() => {
+    axios.get("https://api-tiktok123.herokuapp.com/api/discover").then((res) => setApi(res));
+  }, []);
 
-    const data = [
-        {
-            content: 'genzlife',
-            link: '/',
-            icon: <SharpIcon />,
-        },
-        {
-            content: 'tiktoksoiphim',
-            link: '/',
-            icon: <SharpIcon />,
-        },
-        {
-            content: 'vinawoman',
-            link: '/',
-            icon: <SharpIcon />,
-        },
-        {
-            content: 'Yêu Đơn Phương Là Gì (MEE Remix) - Mee Media & h0n',
-            link: '/',
-            icon: <MusicIcon />,
-        },
-        {
-            content: 'Về Nghe Mẹ Ru - NSND Bach Tuyet & Hứa Kim Tuyền & 14 Casper & Hoàng Dũng',
-            link: '/',
-            icon: <MusicIcon />,
-        },
-        {
-            content: 'Thiên Thần Tình Yêu - RICKY STAR',
-            link: '/',
-            icon: <MusicIcon />,
-        },
-        {
-            content: '6ngay6dem',
-            link: '/',
-            icon: <SharpIcon />,
-        },
-        {
-            content: 'streetdancevietnam',
-            link: '/',
-            icon: <SharpIcon />,
-        },
-        {
-            content: 'Tình Đã Đầy Một Tim - Huyền Tâm Môn',
-            link: '/',
-            icon: <MusicIcon />,
-        },
-        {
-            content: 'Thằng Hầu (Thái Hoàng Remix) [Short Version] - Dung Hoàng Phạm',
-            link: '/',
-            icon: <MusicIcon />,
-        },
-    ]
+  return (
+    <div className={cx("wrapper")} ref={ref}>
+      <div className={cx("container")}>
+        <DivUser />
+        {(() => {
+          if (!currentUser) {
+            return (
+              <div className={cx("containers")}>
+                <p style={{ fontSize: 16 + "px", lineHeight: 22 + "px", color: "rgba(22, 24, 35, 0.5" }}>Log in to follow creators, like videos, and view comments.</p>
+                <Button
+                  login
+                  onClick={() => {
+                    handleShowLogin();
+                  }}
+                >
+                  Log in
+                </Button>
+              </div>
+            );
+          } else {
+            return <DivSelect title="Following accounts" atb="See more" index="1" />;
+          }
+        })()}
 
-    return <div className={cx('wrapper')} ref={ref}>
-        <div className={cx('container')}>
-            <DivUser />
-            <DivSelect title='Suggested accounts' atb='See all' index='0' />
-            <DivSelect title='Following accounts' atb='See more' index='1' />
-            <DisCover data={data} />
-            <div className={cx('sperate')}></div>
-            <DivFooter />
-        </div>
+        <DivSelect title="Suggested accounts" atb="See all" index="0" />
+        <DisCover data={api} />
+        <div className={cx("sperate")}></div>
+        <DivFooter />
+      </div>
     </div>
+  );
 }
 
 export default Sidebar;

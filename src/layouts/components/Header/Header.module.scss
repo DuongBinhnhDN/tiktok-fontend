@@ -61,7 +61,7 @@
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     height: 28px;
     width: 1px;
@@ -131,7 +131,7 @@
 .avatar-btn {
   width: 32px;
   height: 32px;
-  background: url(../../../assets//icons/icon/avatar.jpg) center center / cover;
+  background: url(../../../assets/icons/icon/avatar.jpg) center center / cover;
   border-radius: 999px;
   margin-left: 24px;
   cursor: pointer;
