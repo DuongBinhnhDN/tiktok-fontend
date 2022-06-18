@@ -24,7 +24,10 @@ function Home() {
           })()
         )
       ) : (
-        <HomeLoading />
+        <>
+          <HomeLoading />
+          <HomeLoading />
+        </>
       )}
     </div>
   );

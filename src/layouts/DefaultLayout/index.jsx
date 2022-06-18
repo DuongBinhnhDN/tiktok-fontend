@@ -9,22 +9,12 @@ const cx = classNames.bind(styles);
 
 function DefaultLayout({ children }) {
   const scrollHome = useRef();
-  const [height, setHeight] = useState();
-
-  useEffect(() => {
-    setHeight(document.querySelector(`.${localStorage.getItem("ref")}`).offsetHeight);
-  }, [height]);
-
-  useEffect(() => {
-    localStorage.setItem("scrollHome", scrollHome.current.className);
-  }, []);
-
   return (
     <div className={cx("wrapper")}>
       <Header />
       <div className={cx("container")}>
         <Sidebar />
-        <div className={cx("content")} style={{ height: height }} ref={scrollHome}>
+        <div className={cx("content")} ref={scrollHome}>
           {children}
         </div>
       </div>

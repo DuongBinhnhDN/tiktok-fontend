@@ -47,7 +47,6 @@ function HomeItem({ data, index, big = false }) {
     } else {
       document.querySelector(`[class='${localStorage.getItem("login")}']`).style.display = "block";
       document.querySelector(`[class='${localStorage.getItem("login")}']`).style.display = "flex";
-      ref_video.current.muted = false;
     }
   }
 
