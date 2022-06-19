@@ -10,7 +10,7 @@ function Home() {
   const [api, setApi] = useState();
 
   useEffect(() => {
-    axios.get("https://api-tiktok123.herokuapp.com/api/newfeed").then((res) => setApi(res));
+    axios.get("https://nodejs-tiktok.herokuapp.com/api/newfeed").then((res) => setApi(res));
   }, []);
 
   return (

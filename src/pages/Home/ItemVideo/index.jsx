@@ -39,7 +39,7 @@ function HomeItem({ data, index, big = false }) {
   function handleFollow(buff) {
     if (CurrentUser) {
       setFollow(!follow);
-      axios.post("https://api-tiktok123.herokuapp.com/api/following", {
+      axios.post("https://nodejs-tiktok.herokuapp.com/api/following", {
         id: data._id,
         key: "following",
         value: buff,

@@ -21,7 +21,7 @@ function Sidebar() {
   }, [ref]);
 
   useEffect(() => {
-    axios.get("https://api-tiktok123.herokuapp.com/api/discover").then((res) => setApi(res));
+    axios.get("https://nodejs-tiktok.herokuapp.com/api/discover").then((res) => setApi(res));
   }, []);
 
   return (

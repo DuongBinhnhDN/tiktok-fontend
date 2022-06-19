@@ -69,19 +69,13 @@ const userMenu = [
 ];
 function Header() {
   const currentUser = localStorage.getItem("user");
-
-  window.onload = () => {
-    document.querySelector(`.${localStorage.getItem("scrollHome")}`).scrollTo(0, 0);
-  };
-
   return (
     <header className={cx("wrapper")}>
       <div className={cx("inner")}>
         <div
           className={cx("logo")}
           onClick={() => {
-            window.location.reload();
-            document.querySelector(`.${localStorage.getItem("scrollHome")}`).scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
           <Link to="/">
