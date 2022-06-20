@@ -1,16 +1,20 @@
-import axios from "axios";
 import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import HomeLoading from "../../components/HomeLoading";
 import styles from "./Home.module.scss";
 import HomeItem from "./ItemVideo";
+import { ConnectApi } from "../../components/GlobalFunc";
 const cx = classNames.bind(styles);
 
 function Home() {
   const [api, setApi] = useState();
 
+  function Newfeed() {
+    ConnectApi("https://nodejs-tiktok.herokuapp.com/api/newfeed", "GET").then((res) => setApi(res));
+  }
+
   useEffect(() => {
-    axios.get("https://nodejs-tiktok.herokuapp.com/api/newfeed").then((res) => setApi(res));
+    Newfeed();
   }, []);
 
   return (

@@ -1,10 +1,11 @@
-import axios from "axios";
 import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
 import { CheckIcon, CommentIcon, HeartIcon, MusicIcon, PauseIcon, PlayIcon, ReportIcon, ShareIcon, SoundIcon, UnSoundIcon } from "../../../assets/icons";
 import Button from "../../../components/Button";
 import useElementOnScreen from "../../../hooks/useElementOnScreen";
 import styles from "./ItemVideo.module.scss";
+import { ConnectApi } from "../../../components/GlobalFunc";
+import { handleShowLogin } from "../../../components/GlobalFunc";
 
 const cx = classNames.bind(styles);
 
@@ -39,14 +40,13 @@ function HomeItem({ data, index, big = false }) {
   function handleFollow(buff) {
     if (CurrentUser) {
       setFollow(!follow);
-      axios.post("https://nodejs-tiktok.herokuapp.com/api/following", {
+      ConnectApi("https://nodejs-tiktok.herokuapp.com/api/following", "POST", {
         id: data._id,
         key: "following",
         value: buff,
       });
     } else {
-      document.querySelector(`[class='${localStorage.getItem("login")}']`).style.display = "block";
-      document.querySelector(`[class='${localStorage.getItem("login")}']`).style.display = "flex";
+      handleShowLogin();
     }
   }
 
@@ -151,9 +151,17 @@ function HomeItem({ data, index, big = false }) {
           </div>
           {(() => {
             if (follow) {
-              return <Button following children="Following" onClick={() => handleFollow(false)} />;
+              return (
+                <Button following onClick={() => handleFollow(false)}>
+                  Following
+                </Button>
+              );
             } else {
-              return <Button follow children="Follow" onClick={() => handleFollow(true)} />;
+              return (
+                <Button follow children="Follow" onClick={() => handleFollow(true)}>
+                  Follow
+                </Button>
+              );
             }
           })()}
           <div
@@ -215,19 +223,19 @@ function HomeItem({ data, index, big = false }) {
             </div>
           </div>
           <div className={cx("button-reaction")}>
-            <button className={cx("button-heart")}>
+            <button className={cx("button-heart")} onClick={handleShowLogin}>
               <span className={cx("title-reaction")}>
                 <HeartIcon />
               </span>
               <strong className={cx("title-reactjs")}>{data.heart}</strong>
             </button>
-            <button className={cx("button-heart")}>
+            <button className={cx("button-heart")} onClick={handleShowLogin}>
               <span className={cx("title-reaction")}>
                 <CommentIcon />
               </span>
               <strong className={cx("title-reactjs")}>{data.comment}</strong>
             </button>
-            <button className={cx("button-heart")}>
+            <button className={cx("button-heart")} onClick={handleShowLogin}>
               <span className={cx("title-reaction")}>
                 <ShareIcon />
               </span>

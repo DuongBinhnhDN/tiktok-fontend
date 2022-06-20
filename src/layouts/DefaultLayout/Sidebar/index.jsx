@@ -1,4 +1,3 @@
-import axios from "axios";
 import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
 import Button from "../../../components/Button";
@@ -8,6 +7,7 @@ import DivFooter from "./DivFooter";
 import DivSelect from "./DivSelect";
 import DivUser from "./DivUser";
 import styles from "./Sidebar.module.scss";
+import { ConnectApi } from "../../../components/GlobalFunc";
 
 const cx = classNames.bind(styles);
 
@@ -20,8 +20,12 @@ function Sidebar() {
     localStorage.setItem("ref", ref.current.className);
   }, [ref]);
 
+  function Discover() {
+    ConnectApi("https://nodejs-tiktok.herokuapp.com/api/discover", "GET").then((res) => setApi(res));
+  }
+
   useEffect(() => {
-    axios.get("https://nodejs-tiktok.herokuapp.com/api/discover").then((res) => setApi(res));
+    Discover();
   }, []);
 
   return (
@@ -33,12 +37,7 @@ function Sidebar() {
             return (
               <div className={cx("containers")}>
                 <p style={{ fontSize: 16 + "px", lineHeight: 22 + "px", color: "rgba(22, 24, 35, 0.5" }}>Log in to follow creators, like videos, and view comments.</p>
-                <Button
-                  login
-                  onClick={() => {
-                    handleShowLogin();
-                  }}
-                >
+                <Button login onClick={handleShowLogin}>
                   Log in
                 </Button>
               </div>

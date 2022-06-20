@@ -109,7 +109,7 @@ function Header() {
             </div>
           ) : (
             <>
-              <Button text leftIcon={<PlusIcon />}>
+              <Button text leftIcon={<PlusIcon />} onClick={handleShowLogin}>
                 Upload
               </Button>
               <Button

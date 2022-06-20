@@ -11,23 +11,41 @@
   background: rgba(0, 0, 0, 0.5);
   position: fixed;
   inset: 0px;
-  animation: modal linear 0.2s;
+  animation: modal ease-in 0.2s;
 }
 
 @keyframes modal {
-  from {
+  0% {
     opacity: 0;
   }
-  to {
+  30% {
+    opacity: 0.3;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
     opacity: 1;
   }
 }
 
 @keyframes modal1 {
-  from {
+  0% {
+    transform: scale(0);
+  }
+  30% {
     transform: scale(0.3);
   }
-  to {
+  60% {
+    transform: scale(0.6);
+  }
+  90% {
+    transform: scale(0.9);
+  }
+  100% {
     transform: scale(1);
   }
 }
@@ -42,7 +60,7 @@
   max-height: 693px;
   height: 80%;
   overflow: hidden;
-  animation: modal1 linear 0.1s;
+  animation: modal1 ease-in 0.2s;
 }
 .container {
   width: 483px;
