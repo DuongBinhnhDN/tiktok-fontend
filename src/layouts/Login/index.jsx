@@ -6,15 +6,17 @@ const cx = classNames.bind(styles);
 
 function Login() {
   const login = useRef();
+  const login_select = useRef();
 
   useEffect(() => {
     localStorage.setItem("login", login.current.className);
+    localStorage.setItem("login_select", login_select.current.className);
   }, [login]);
 
   return (
     <div className={cx("wrapper")} ref={login}>
       <div className={cx("wrapper-ui")}></div>
-      <div className={cx("wrapper-select")}>
+      <div className={cx("wrapper-select")} ref={login_select}>
         <div className={cx("container")}>
           <div className={cx("header-login")}>
             <div className={cx("content")}>
@@ -85,7 +87,8 @@ function Login() {
         <div
           className={cx("close")}
           onClick={() => {
-            login.current.style.display = "none";
+            login.current.style.visibility = "hidden";
+            login_select.current.style.opacity = 0;
           }}
         >
           <CloseIcon />

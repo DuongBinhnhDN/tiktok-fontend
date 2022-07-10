@@ -1,6 +1,7 @@
 import Tippy from "@tippyjs/react";
 import HeadlessTippy from "@tippyjs/react/headless";
 import classNames from "classnames/bind";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "tippy.js/dist/tippy.css";
 import { CoinIcon, HelpIcon, InfoMation, KeyboardIcon, LanguageIcon, LogOutIcon, MessageIcon, MoreIcon, PlusIcon, SettingIcon, UserIcon } from "../../../assets/icons";
@@ -67,8 +68,15 @@ const userMenu = [
     separate: true,
   },
 ];
+
 function Header() {
   const currentUser = localStorage.getItem("user");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.querySelector(`[class='${localStorage.getItem("ref")}']`).scrollTo({ top: 0, behavior: "smooth" });
+  });
+
   return (
     <header className={cx("wrapper")}>
       <div className={cx("inner")}>
@@ -76,6 +84,7 @@ function Header() {
           className={cx("logo")}
           onClick={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
+            document.querySelector(`[class='${localStorage.getItem("ref")}']`).scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
           <Link to="/">

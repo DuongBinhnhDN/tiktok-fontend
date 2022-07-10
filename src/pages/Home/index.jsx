@@ -9,8 +9,8 @@ const cx = classNames.bind(styles);
 function Home() {
   const [api, setApi] = useState();
 
-  function Newfeed() {
-    ConnectApi("https://nodejs-tiktok.herokuapp.com/api/newfeed", "GET").then((res) => setApi(res));
+  async function Newfeed() {
+    await ConnectApi("https://nodejs-tiktok.herokuapp.com/api/newfeed", "GET").then((res) => setApi(res));
   }
 
   useEffect(() => {

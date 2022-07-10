@@ -20,8 +20,8 @@ function Sidebar() {
     localStorage.setItem("ref", ref.current.className);
   }, [ref]);
 
-  function Discover() {
-    ConnectApi("https://nodejs-tiktok.herokuapp.com/api/discover", "GET").then((res) => setApi(res));
+  async function Discover() {
+    return await ConnectApi("https://nodejs-tiktok.herokuapp.com/api/discover", "GET").then((res) => setApi(res));
   }
 
   useEffect(() => {

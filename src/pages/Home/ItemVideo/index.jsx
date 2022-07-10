@@ -2,12 +2,13 @@ import classNames from "classnames/bind";
 import { useEffect, useRef, useState } from "react";
 import { CheckIcon, CommentIcon, HeartIcon, MusicIcon, PauseIcon, PlayIcon, ReportIcon, ShareIcon, SoundIcon, UnSoundIcon } from "../../../assets/icons";
 import Button from "../../../components/Button";
+import { ConnectApi, handleShowLogin } from "../../../components/GlobalFunc";
 import useElementOnScreen from "../../../hooks/useElementOnScreen";
 import styles from "./ItemVideo.module.scss";
-import { ConnectApi } from "../../../components/GlobalFunc";
-import { handleShowLogin } from "../../../components/GlobalFunc";
 
 const cx = classNames.bind(styles);
+
+let isReady = false;
 
 function HomeItem({ data, index, big = false }) {
   const [play, setPlay] = useState(false);
@@ -22,9 +23,13 @@ function HomeItem({ data, index, big = false }) {
 
   const ref_video = useRef();
 
-  const ref_progress = useRef();
-
   const ref_process = useRef();
+
+  const ref_process1 = useRef();
+
+  const ref_processbar = useRef();
+
+  const ref_progress = useRef();
 
   const updateTime = useRef();
 
@@ -37,10 +42,10 @@ function HomeItem({ data, index, big = false }) {
   const isVisibile = useElementOnScreen(options, ref_video);
   const CurrentUser = localStorage.getItem("user");
 
-  function handleFollow(buff) {
+  async function handleFollow(buff) {
     if (CurrentUser) {
       setFollow(!follow);
-      ConnectApi("https://nodejs-tiktok.herokuapp.com/api/following", "POST", {
+      return await ConnectApi("https://nodejs-tiktok.herokuapp.com/api/following", "POST", {
         id: data._id,
         key: "following",
         value: buff,
@@ -75,6 +80,29 @@ function HomeItem({ data, index, big = false }) {
       }
     };
 
+    ref_processbar.current.onmousedown = function () {
+      isReady = true;
+    };
+
+    document.onmousemove = function (evt) {
+      const clientX = evt.clientX;
+      const left = ref_processbar.current.getBoundingClientRect().left;
+      const width = ref_processbar.current.getBoundingClientRect().width;
+
+      const min = left;
+      const max = ref_processbar.current.getBoundingClientRect().width + left;
+
+      if (isReady && clientX >= min && clientX <= max) {
+        const progressPercent = (clientX - left) / width;
+        ref_process1.current.style.left = progressPercent * 100 - 2 + "%";
+        ref_process.current.style.width = progressPercent * 100 + "%";
+      }
+    };
+
+    document.onmouseup = function () {
+      isReady = false;
+    };
+
     ref_video.current.ontimeupdate = function () {
       if (this.duration) {
         const progressPercent = Math.floor((this.currentTime / this.duration) * 100);
@@ -83,7 +111,7 @@ function HomeItem({ data, index, big = false }) {
             "/" +
             (Math.floor(this.duration).toString().length >= 2 ? "00:" + Math.floor(this.duration) : "00:0" + Math.floor(this.duration))
         );
-        ref_progress.current.value = progressPercent;
+        ref_process1.current.style.left = progressPercent - 2 + "%";
         ref_process.current.style.width = progressPercent + "%";
       }
     };
@@ -100,7 +128,6 @@ function HomeItem({ data, index, big = false }) {
 
     ref_video.current.onended = function () {
       setPlay(false);
-      ref_progress.current.value = 0;
       ref_process.current.style.width = 0 + "%";
     };
 
@@ -136,7 +163,7 @@ function HomeItem({ data, index, big = false }) {
       <div className={cx("div-btn-content")}>
         <div className={cx("div-btn_item")}>
           <div className={cx("div-btn_item-div")}>
-            <a className={cx("link-btn-item")}>
+            <a className={cx("link-btn-item")} href="/">
               <div className={cx("link-btn-item_div")}>
                 <span className={cx("link-btn-item_span")}>{data.avatar ? <img className={cx("display")} src={data.avatar}></img> : null}</span>
               </div>
@@ -175,7 +202,7 @@ function HomeItem({ data, index, big = false }) {
             <span style={{ display: "inline-block" }}>{data.title}</span>
             {data.tag_select
               ? data.name_tag.map((item, index) => (
-                  <a className={cx("tag")} href={item.link_tag} target="_blank" key={index}>
+                  <a className={cx("tag")} href={item.link_tag} target="_blank" rel="noreferrer" key={index}>
                     <strong className={cx("tag_strong")} key={index}>
                       #{item.key}
                     </strong>
@@ -198,7 +225,9 @@ function HomeItem({ data, index, big = false }) {
             <div className={cx("div_first-item")}>
               <div className={cx("div-1")}>
                 <div className={cx("div-1_item")}>
-                  <video muted="muted" loop src={data.link_video} className={cx("display")} ref={ref_video}></video>
+                  <video loop className={cx("display")} ref={ref_video}>
+                    <source src={data.link_video} type="video/mp4" />
+                  </video>
                 </div>
               </div>
               <div className={cx("button-play")} onClick={() => setPlay(!play)} ref={ref}>
@@ -208,9 +237,10 @@ function HomeItem({ data, index, big = false }) {
                 <div className={cx("video-sound")}>{sound ? <UnSoundIcon /> : <SoundIcon />}</div>
               </div>
               <div className={cx("button-footer")}>
-                <div className={cx("process-item")}>
-                  <input className={cx("progress")} type="range" min="0" max="100" defaultValue="0" ref={ref_progress} />
+                <div className={cx("process-item")} ref={ref_processbar}>
+                  <div className={cx("progress")} ref={ref_progress}></div>
                   <div className={cx("progress__track")} ref={ref_process}></div>
+                  <div className={cx("progress__track1")} ref={ref_process1}></div>
                 </div>
                 <div className={cx("process-number")} ref={updateTime}>
                   {time}
