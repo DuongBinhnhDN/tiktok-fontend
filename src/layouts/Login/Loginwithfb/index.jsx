@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { FacebookAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCk1yOXH9SpvO0Aafky8WJRe4WmX2EP0-Q",
@@ -11,4 +11,14 @@ const firebaseConfig = {
   measurementId: "G-20TDXHFC3G",
 };
 const app = initializeApp(firebaseConfig);
-export const authentication = getAuth(app);
+
+export function LoginFacebook() {
+  const provider = new FacebookAuthProvider();
+  signInWithPopup(getAuth(app), provider)
+    .then((re) => {
+      console.log(re);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
