@@ -8,8 +8,8 @@ import styles from "./ItemVideo.module.scss";
 
 const cx = classNames.bind(styles);
 
-function HomeItem({ data, index, big = false }) {
-  const [play, setPlay] = useState(false);
+function ItemVideo({ data, index, big = false }) {
+  const [play, setPlay] = useState();
   const [sound, setSound] = useState(false);
   const [time, setTime] = useState();
   const [follow, setFollow] = useState(data.following);
@@ -17,7 +17,9 @@ function HomeItem({ data, index, big = false }) {
   const refSound = useRef();
   const ref_video = useRef();
   const updateTime = useRef();
+  const progres = useRef();
   const progress = useRef();
+  const progress__trackupdat = useRef();
   const progress__trackupdate = useRef();
 
   const options = {
@@ -87,6 +89,17 @@ function HomeItem({ data, index, big = false }) {
       }
     };
 
+    progres.current.oninput = function (e) {
+      progress__trackupdat.current.style.height = e.target.value + "%";
+      let volume = e.target.value / 100;
+      ref_video.current.volume = volume;
+      if (volume < 0.01) {
+        setSound(true);
+      } else {
+        setSound(false);
+      }
+    };
+
     progress.current.oninput = function (e) {
       progress__trackupdate.current.style.width = e.target.value + "%";
       const seekTime = (e.target.value * ref_video.current.duration) / 100;
@@ -98,7 +111,9 @@ function HomeItem({ data, index, big = false }) {
     };
 
     progress.current.onmouseup = function () {
-      ref_video.current.play();
+      if (isVisibile) {
+        ref_video.current.play();
+      }
     };
 
     ref_video.current.onended = function () {
@@ -199,18 +214,26 @@ function HomeItem({ data, index, big = false }) {
             <div className={cx("div_first-item")}>
               <div className={cx("div-1")}>
                 <div className={cx("div-1_item")}>
-                  <video loop className={cx("display")} ref={ref_video} src={data.link_video}></video>
+                  <video loop muted={true} className={cx("display")} ref={ref_video} src={data.link_video}></video>
                 </div>
               </div>
               <div className={cx("button-play")} onClick={() => setPlay(!play)} ref={ref}>
                 {play ? <PlayIcon /> : <PauseIcon />}
               </div>
-              <div className={cx("button-sound")} ref={refSound}>
-                <div className={cx("video-sound")}>{sound ? <UnSoundIcon /> : <SoundIcon />}</div>
+              <div className={cx("toast-sound")}>
+                <div className={cx("button-sound")} ref={refSound}>
+                  <div className={cx("video-sound")}>{sound ? <UnSoundIcon /> : <SoundIcon />}</div>
+                </div>
+                <div className={cx("edit-sound")}>
+                  <input className={cx("progres")} type="range" step="1" min="0" max="100" orient="vertical" ref={progres} />
+                  <div className={cx("progress__trac")}>
+                    <div className={cx("progress__track-updat")} ref={progress__trackupdat}></div>
+                  </div>
+                </div>
               </div>
               <div className={cx("button-footer")}>
                 <div className={cx("process-item")}>
-                  <input id="progress--main" className={cx("progress")} type="range" step="1" min="0" max="100" ref={progress} />
+                  <input className={cx("progress")} type="range" step="1" min="0" max="100" ref={progress} />
                   <div className={cx("progress__track")}>
                     <div className={cx("progress__track-update")} ref={progress__trackupdate}></div>
                   </div>
@@ -251,4 +274,4 @@ function HomeItem({ data, index, big = false }) {
   );
 }
 
-export default HomeItem;
+export default ItemVideo;

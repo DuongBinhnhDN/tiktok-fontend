@@ -6,7 +6,7 @@
   outline: 0px;
   display: flex;
   visibility: hidden;
-  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transition: all 100ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 }
 
 .wrapper-ui {
@@ -18,8 +18,7 @@
 .wrapper-select {
   opacity: 0;
   border-radius: 8px;
-  transform: translateX(-30%);
-  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transition: all 1000ms cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
   background-color: rgb(255, 255, 255);
   margin: auto;
   position: relative;
@@ -27,6 +26,7 @@
   height: 80%;
   overflow: hidden;
 }
+
 .container {
   width: 483px;
   height: 100%;

@@ -10,6 +10,7 @@ import Button from "../../../components/Button";
 import { handleShowLogin } from "../../../components/GlobalFunc";
 import Menu from "../../../components/Popper/Menu";
 import Login from "../../Login";
+import WarningSound from "../../WarningSound";
 import Search from "../Search";
 import styles from "./Header.module.scss";
 
@@ -76,27 +77,23 @@ function Header() {
     window.onbeforeunload = function () {
       window.scrollTo(0, 0);
     };
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    document.querySelector(`[class='${localStorage.getItem("ref")}']`).scrollTo({ top: 0, behavior: "smooth" });
   });
 
   return (
     <header className={cx("wrapper")}>
       <div className={cx("inner")}>
-        <div
-          className={cx("logo")}
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            document.querySelector(`[class='${localStorage.getItem("ref")}']`).scrollTo({ top: 0, behavior: "smooth" });
-          }}
-        >
-          <Link to="/">
+        <div className={cx("logo")}>
+          <a href="/">
             <img style={{ display: "block", cursor: "pointer" }} src={images.logo} alt="TikTok"></img>
-          </Link>
+          </a>
         </div>
 
         <Search></Search>
-
+        {(() => {
+          if (window.location.pathname.length <= 1) {
+            return <WarningSound />;
+          }
+        })()}
         <div className={cx("actions")}>
           {currentUser ? (
             <div className={cx("icon-center")}>

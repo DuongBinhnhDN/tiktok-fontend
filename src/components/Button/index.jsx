@@ -22,6 +22,7 @@ function Button({
   follow,
   following,
   login,
+  enablesound,
   ...passAvailable
 }) {
   let Comp = "div";
@@ -56,6 +57,7 @@ function Button({
     follow,
     following,
     login,
+    enablesound,
   });
 
   return (

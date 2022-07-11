@@ -1,7 +1,10 @@
 import classNames from "classnames/bind";
+import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
 import { useEffect, useRef } from "react";
 import { CloseIcon, FbIcon, GgIcon, IclouldIcon, InstagramIcon, KakaotalkIcon, LineIcon, PersonIcon, QrIcon, TwitterIcon } from "../../assets/icons";
+import { authentication } from "../Login/Loginwithfb";
 import styles from "./Login.module.scss";
+
 const cx = classNames.bind(styles);
 
 function Login() {
@@ -33,12 +36,24 @@ function Login() {
                   Use phone / email / username
                 </div>
               </a>
-              <a className={cx("link-login")} href="/">
+              <div
+                className={cx("link-login")}
+                onClick={() => {
+                  const provider = new FacebookAuthProvider();
+                  signInWithPopup(authentication, provider)
+                    .then((re) => {
+                      console.log(re);
+                    })
+                    .catch((err) => {
+                      console.log(err.message);
+                    });
+                }}
+              >
                 <div className={cx("link-login-item")}>
                   <div className={cx("item-properties")}>{<FbIcon />}</div>
                   Continue with Facebook
                 </div>
-              </a>
+              </div>
               <a className={cx("link-login")} href="/">
                 <div className={cx("link-login-item")}>
                   <div className={cx("item-properties")}>{<GgIcon />}</div>
