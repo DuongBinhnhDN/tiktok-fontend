@@ -73,6 +73,9 @@ function Header() {
   const currentUser = localStorage.getItem("user");
 
   useEffect(() => {
+    window.onbeforeunload = function () {
+      window.scrollTo(0, 0);
+    };
     window.scrollTo({ top: 0, behavior: "smooth" });
     document.querySelector(`[class='${localStorage.getItem("ref")}']`).scrollTo({ top: 0, behavior: "smooth" });
   });
